@@ -85,7 +85,7 @@ export function Navbar() {
         });
         if (bestId) setActive(bestId);
       },
-      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.01, 0.5, 1] }
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.01, 0.5, 1] },
     );
     SECTIONS.forEach((s) => {
       const el = document.getElementById(s.id);
@@ -117,7 +117,9 @@ export function Navbar() {
   // ESC + body scroll lock while open
   useEffect(() => {
     if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -133,7 +135,9 @@ export function Navbar() {
       <header
         className="sticky top-0 z-50 hidden md:block"
         style={{
-          background: scrolled ? "color-mix(in oklab, var(--background) 70%, transparent)" : "transparent",
+          background: scrolled
+            ? "color-mix(in oklab, var(--background) 70%, transparent)"
+            : "transparent",
           borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
           backdropFilter: scrolled ? "blur(12px) saturate(140%)" : "none",
           transition: "background 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease",
@@ -195,7 +199,10 @@ export function Navbar() {
       <header
         className="sticky top-0 z-50 md:hidden"
         style={{
-          background: scrolled || menuOpen ? "color-mix(in oklab, var(--background) 80%, transparent)" : "transparent",
+          background:
+            scrolled || menuOpen
+              ? "color-mix(in oklab, var(--background) 80%, transparent)"
+              : "transparent",
           borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
           backdropFilter: scrolled || menuOpen ? "blur(12px) saturate(140%)" : "none",
           transition: "background 260ms ease, border-color 260ms ease, backdrop-filter 260ms ease",
@@ -312,7 +319,8 @@ export function Navbar() {
               right: -80,
               width: 240,
               height: 240,
-              background: "radial-gradient(circle, color-mix(in oklab, var(--accent) 22%, transparent) 0%, transparent 70%)",
+              background:
+                "radial-gradient(circle, color-mix(in oklab, var(--accent) 22%, transparent) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -335,7 +343,8 @@ export function Navbar() {
 
           {/* Meta line */}
           <div className="relative px-5 pt-5 font-plex text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-            <span className="text-accent">$</span> site map · {navNumber(TOTAL_SECTIONS - 1)} sections
+            <span className="text-accent">$</span> site map · {navNumber(TOTAL_SECTIONS - 1)}{" "}
+            sections
           </div>
 
           {/* Nav items */}
@@ -354,9 +363,13 @@ export function Navbar() {
                   className="group relative flex min-h-[56px] items-center justify-between rounded-md px-4 font-plex text-[15px] transition-all"
                   style={{
                     color: isActive ? "var(--accent)" : "var(--foreground)",
-                    background: isActive ? "color-mix(in oklab, var(--accent) 10%, transparent)" : "transparent",
+                    background: isActive
+                      ? "color-mix(in oklab, var(--accent) 10%, transparent)"
+                      : "transparent",
                     border: "1px solid",
-                    borderColor: isActive ? "color-mix(in oklab, var(--accent) 40%, transparent)" : "transparent",
+                    borderColor: isActive
+                      ? "color-mix(in oklab, var(--accent) 40%, transparent)"
+                      : "transparent",
                     transform: menuOpen ? "translateX(0)" : "translateX(20px)",
                     opacity: menuOpen ? 1 : 0,
                     transition: `transform 380ms cubic-bezier(0.22,1,0.36,1) ${80 + i * 45}ms, opacity 380ms ease ${80 + i * 45}ms, background 200ms ease, color 200ms ease, border-color 200ms ease`,
@@ -365,7 +378,11 @@ export function Navbar() {
                   <span className="flex items-center gap-3">
                     <span
                       className="font-mono text-[10px] tabular-nums"
-                      style={{ color: isActive ? "var(--accent)" : "color-mix(in oklab, var(--muted-foreground) 90%, transparent)" }}
+                      style={{
+                        color: isActive
+                          ? "var(--accent)"
+                          : "color-mix(in oklab, var(--muted-foreground) 90%, transparent)",
+                      }}
                     >
                       {navNumber(i)}
                     </span>
@@ -431,7 +448,6 @@ export function Navbar() {
                 guptaaryandra@gmail.com
               </a>
             </div>
-
           </div>
         </aside>
       </div>

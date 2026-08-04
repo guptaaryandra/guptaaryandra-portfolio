@@ -170,7 +170,14 @@ type Line = {
 
 function flattenTree(root: NodeT): Line[] {
   const out: Line[] = [];
-  const walk = (node: NodeT, prefix: string, connector: string, depth: number, isRoot: boolean, path: string) => {
+  const walk = (
+    node: NodeT,
+    prefix: string,
+    connector: string,
+    depth: number,
+    isRoot: boolean,
+    path: string,
+  ) => {
     out.push({ key: path, prefix, connector, name: node.name, desc: node.desc, depth, isRoot });
     const kids = node.children || [];
     kids.forEach((child, i) => {
@@ -210,65 +217,69 @@ function DependencyTree({
       }}
     >
       <div className="min-w-max">
-      {lines.map((ln, idx) => {
-        const isHover = hovered === ln.key;
-        const delay = startDelay + idx * perLineDelay;
-        const pulseActive = rootHover;
-        return (
-          <div
-            key={ln.key}
-            className="group flex items-start whitespace-pre"
-            style={{
-              opacity: active ? (isHover ? 1 : ln.isRoot ? 1 : 0.75) : 0,
-              transform: active ? "translateX(0)" : "translateX(-6px)",
-              filter: active ? "blur(0)" : "blur(2px)",
-              transition: `opacity 420ms ease ${delay}ms, transform 420ms ease ${delay}ms, filter 420ms ease ${delay}ms`,
-            }}
-            onMouseEnter={() => {
-              setHovered(ln.key);
-              if (ln.isRoot) setRootHover(true);
-            }}
-            onMouseLeave={() => {
-              setHovered((v) => (v === ln.key ? null : v));
-              if (ln.isRoot) setRootHover(false);
-            }}
-          >
-            {!ln.isRoot && (
-              <span
-                aria-hidden
-                style={{
-                  color: "var(--border-strong)",
-                  opacity: pulseActive ? 0.9 : 0.55,
-                  transition: "opacity 300ms ease",
-                }}
-              >
-                {ln.prefix}
-                {ln.connector}
-              </span>
-            )}
-            <span
+        {lines.map((ln, idx) => {
+          const isHover = hovered === ln.key;
+          const delay = startDelay + idx * perLineDelay;
+          const pulseActive = rootHover;
+          return (
+            <div
+              key={ln.key}
+              className="group flex items-start whitespace-pre"
               style={{
-                color: ln.isRoot ? "var(--accent)" : "var(--foreground)",
-                opacity: ln.isRoot ? 1 : isHover ? 1 : 0.78,
-                fontWeight: ln.isRoot ? 500 : 400,
-                letterSpacing: ln.isRoot ? "0.04em" : "0",
-                textTransform: ln.isRoot ? "uppercase" : "none",
-                transition: "opacity 200ms ease, color 200ms ease",
+                opacity: active ? (isHover ? 1 : ln.isRoot ? 1 : 0.75) : 0,
+                transform: active ? "translateX(0)" : "translateX(-6px)",
+                filter: active ? "blur(0)" : "blur(2px)",
+                transition: `opacity 420ms ease ${delay}ms, transform 420ms ease ${delay}ms, filter 420ms ease ${delay}ms`,
+              }}
+              onMouseEnter={() => {
+                setHovered(ln.key);
+                if (ln.isRoot) setRootHover(true);
+              }}
+              onMouseLeave={() => {
+                setHovered((v) => (v === ln.key ? null : v));
+                if (ln.isRoot) setRootHover(false);
               }}
             >
-              {ln.name}
-            </span>
-            {ln.desc && isHover && !ln.isRoot && (
+              {!ln.isRoot && (
+                <span
+                  aria-hidden
+                  style={{
+                    color: "var(--border-strong)",
+                    opacity: pulseActive ? 0.9 : 0.55,
+                    transition: "opacity 300ms ease",
+                  }}
+                >
+                  {ln.prefix}
+                  {ln.connector}
+                </span>
+              )}
               <span
-                className="ml-3 font-mono text-[10.5px] uppercase tracking-[0.18em]"
-                style={{ color: "var(--muted-foreground)", opacity: 0.9, animation: "fade-in 220ms ease-out" }}
+                style={{
+                  color: ln.isRoot ? "var(--accent)" : "var(--foreground)",
+                  opacity: ln.isRoot ? 1 : isHover ? 1 : 0.78,
+                  fontWeight: ln.isRoot ? 500 : 400,
+                  letterSpacing: ln.isRoot ? "0.04em" : "0",
+                  textTransform: ln.isRoot ? "uppercase" : "none",
+                  transition: "opacity 200ms ease, color 200ms ease",
+                }}
               >
-                → {ln.desc}
+                {ln.name}
               </span>
-            )}
-          </div>
-        );
-      })}
+              {ln.desc && isHover && !ln.isRoot && (
+                <span
+                  className="ml-3 font-mono text-[10.5px] uppercase tracking-[0.18em]"
+                  style={{
+                    color: "var(--muted-foreground)",
+                    opacity: 0.9,
+                    animation: "fade-in 220ms ease-out",
+                  }}
+                >
+                  → {ln.desc}
+                </span>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -358,7 +369,12 @@ export function Experience() {
   }, [revealed]);
 
   return (
-    <Section id="experience" label="02 · Engineering Logbook" title={<TypedTitle text="Commits from the field." />} meta="./log/engineering">
+    <Section
+      id="experience"
+      label="02 · Engineering Logbook"
+      title={<TypedTitle text="Commits from the field." />}
+      meta="./log/engineering"
+    >
       <div ref={containerRef} className="relative">
         {/* rail base */}
         <div
@@ -372,7 +388,8 @@ export function Experience() {
           className="pointer-events-none absolute left-[7px] top-0 w-px"
           style={{
             height: progressY,
-            background: "linear-gradient(to bottom, color-mix(in oklab, var(--accent) 60%, transparent), var(--accent))",
+            background:
+              "linear-gradient(to bottom, color-mix(in oklab, var(--accent) 60%, transparent), var(--accent))",
             transition: "height 120ms linear",
             boxShadow: "0 0 8px color-mix(in oklab, var(--accent) 50%, transparent)",
           }}
@@ -430,7 +447,8 @@ export function Experience() {
                         ? "0 0 0 5px color-mix(in oklab, var(--accent) 14%, transparent), 0 0 18px color-mix(in oklab, var(--accent) 55%, transparent)"
                         : "none",
                       animation: isActive ? "node-pulse 2.4s ease-in-out infinite" : "none",
-                      transition: "background 400ms ease, border-color 400ms ease, box-shadow 400ms ease",
+                      transition:
+                        "background 400ms ease, border-color 400ms ease, box-shadow 400ms ease",
                     }}
                   />
                   {/* left connector highlight on hover */}
@@ -449,7 +467,8 @@ export function Experience() {
                       opacity: isRevealed ? 1 : 0,
                       transform: isRevealed ? "translateY(0)" : "translateY(6px)",
                       filter: isRevealed ? "blur(0)" : "blur(3px)",
-                      transition: "opacity 460ms ease 120ms, transform 460ms ease 120ms, filter 460ms ease 120ms",
+                      transition:
+                        "opacity 460ms ease 120ms, transform 460ms ease 120ms, filter 460ms ease 120ms",
                     }}
                   >
                     <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
@@ -459,7 +478,9 @@ export function Experience() {
                       {it.role}
                     </div>
                     {it.org && (
-                      <div className="mt-1 font-mono text-[12px] text-muted-foreground">{it.org}</div>
+                      <div className="mt-1 font-mono text-[12px] text-muted-foreground">
+                        {it.org}
+                      </div>
                     )}
                     <div className="mt-4">
                       <StatusBadge kind={it.status} />
