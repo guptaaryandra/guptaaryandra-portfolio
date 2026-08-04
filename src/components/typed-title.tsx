@@ -34,7 +34,7 @@ export function TypedTitle({ text, speed = 42 }: { text: string; speed?: number 
           }
         });
       },
-      { rootMargin: "-10% 0px -10% 0px" }
+      { rootMargin: "-10% 0px -10% 0px" },
     );
     obs.observe(el);
     return () => obs.disconnect();

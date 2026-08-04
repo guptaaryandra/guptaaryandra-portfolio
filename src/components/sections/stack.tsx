@@ -15,60 +15,194 @@ type NodeInfo = {
 const NODES: NodeInfo[] = [
   { id: "cloud", label: "Cloud", role: "Domain / Root" },
 
-  { id: "aws", label: "AWS", parent: "cloud", role: "Cloud Provider",
-    meta: [{ k: "Projects", v: "3 Deployments" }, { k: "Currently Used", v: "Yes" }],
-    path: ["aws","ec2","iam","s3","cloudfront","route53","docker","kubernetes","terraform","gitlab","jenkins","prometheus","grafana"] },
-  { id: "ec2", label: "EC2", parent: "aws", role: "Compute", meta: [{ k: "Usage", v: "Static site + Docker host" }] },
-  { id: "iam", label: "IAM", parent: "aws", role: "Access Management", meta: [{ k: "Focus", v: "Least-privilege roles" }] },
-  { id: "s3", label: "S3", parent: "aws", role: "Object Storage", meta: [{ k: "Projects", v: "Static Website" }] },
-  { id: "cloudfront", label: "CloudFront", parent: "aws", role: "CDN / Edge", meta: [{ k: "Projects", v: "1 Deployment" }] },
-  { id: "route53", label: "Route53", parent: "aws", role: "DNS", meta: [{ k: "Projects", v: "Custom domain routing" }] },
+  {
+    id: "aws",
+    label: "AWS",
+    parent: "cloud",
+    role: "Cloud Provider",
+    meta: [
+      { k: "Projects", v: "3 Deployments" },
+      { k: "Currently Used", v: "Yes" },
+    ],
+    path: [
+      "aws",
+      "ec2",
+      "iam",
+      "s3",
+      "cloudfront",
+      "route53",
+      "docker",
+      "kubernetes",
+      "terraform",
+      "gitlab",
+      "jenkins",
+      "prometheus",
+      "grafana",
+    ],
+  },
+  {
+    id: "ec2",
+    label: "EC2",
+    parent: "aws",
+    role: "Compute",
+    meta: [{ k: "Usage", v: "Static site + Docker host" }],
+  },
+  {
+    id: "iam",
+    label: "IAM",
+    parent: "aws",
+    role: "Access Management",
+    meta: [{ k: "Focus", v: "Least-privilege roles" }],
+  },
+  {
+    id: "s3",
+    label: "S3",
+    parent: "aws",
+    role: "Object Storage",
+    meta: [{ k: "Projects", v: "Static Website" }],
+  },
+  {
+    id: "cloudfront",
+    label: "CloudFront",
+    parent: "aws",
+    role: "CDN / Edge",
+    meta: [{ k: "Projects", v: "1 Deployment" }],
+  },
+  {
+    id: "route53",
+    label: "Route53",
+    parent: "aws",
+    role: "DNS",
+    meta: [{ k: "Projects", v: "Custom domain routing" }],
+  },
 
-  { id: "linux", label: "Linux", parent: "cloud", role: "Operating System",
+  {
+    id: "linux",
+    label: "Linux",
+    parent: "cloud",
+    role: "Operating System",
     meta: [{ k: "Learning Stage", v: "Hands-on" }],
-    path: ["linux","ubuntu","rhel","bash"] },
+    path: ["linux", "ubuntu", "rhel", "bash"],
+  },
   { id: "ubuntu", label: "Ubuntu", parent: "linux", role: "Distribution" },
   { id: "rhel", label: "RHEL", parent: "linux", role: "Distribution" },
   { id: "bash", label: "Bash", parent: "linux", role: "Shell / Scripting" },
 
-  { id: "docker", label: "Docker", parent: "cloud", role: "Container Runtime",
-    meta: [{ k: "Projects", v: "Dockerized Web Server" }, { k: "Status", v: "Production Practice" }] },
-  { id: "kubernetes", label: "Kubernetes", parent: "docker", role: "Orchestration",
+  {
+    id: "docker",
+    label: "Docker",
+    parent: "cloud",
+    role: "Container Runtime",
+    meta: [
+      { k: "Projects", v: "Dockerized Web Server" },
+      { k: "Status", v: "Production Practice" },
+    ],
+  },
+  {
+    id: "kubernetes",
+    label: "Kubernetes",
+    parent: "docker",
+    role: "Orchestration",
     meta: [{ k: "Learning Stage", v: "Learning" }],
-    path: ["kubernetes","jenkins","gitlab","terraform","prometheus","grafana"] },
+    path: ["kubernetes", "jenkins", "gitlab", "terraform", "prometheus", "grafana"],
+  },
 
-  { id: "jenkins", label: "Jenkins", parent: "kubernetes", role: "CI Server",
-    meta: [{ k: "Learning Stage", v: "Learning" }] },
-  { id: "gitlab", label: "GitLab CI/CD", parent: "kubernetes", role: "Pipeline-as-code",
-    meta: [{ k: "Learning Stage", v: "Learning" }] },
-  { id: "terraform", label: "Terraform", parent: "kubernetes", role: "Infrastructure as Code",
-    meta: [{ k: "Learning Stage", v: "Hands-on" }] },
+  {
+    id: "jenkins",
+    label: "Jenkins",
+    parent: "kubernetes",
+    role: "CI Server",
+    meta: [{ k: "Learning Stage", v: "Learning" }],
+  },
+  {
+    id: "gitlab",
+    label: "GitLab CI/CD",
+    parent: "kubernetes",
+    role: "Pipeline-as-code",
+    meta: [{ k: "Learning Stage", v: "Learning" }],
+  },
+  {
+    id: "terraform",
+    label: "Terraform",
+    parent: "kubernetes",
+    role: "Infrastructure as Code",
+    meta: [{ k: "Learning Stage", v: "Hands-on" }],
+  },
 
   { id: "monitoring", label: "Monitoring", parent: "kubernetes", role: "Observability Layer" },
-  { id: "prometheus", label: "Prometheus", parent: "monitoring", role: "Metrics & Alerting",
+  {
+    id: "prometheus",
+    label: "Prometheus",
+    parent: "monitoring",
+    role: "Metrics & Alerting",
     meta: [{ k: "Learning Stage", v: "Learning" }],
-    path: ["prometheus","grafana"] },
-  { id: "grafana", label: "Grafana", parent: "monitoring", role: "Dashboards",
+    path: ["prometheus", "grafana"],
+  },
+  {
+    id: "grafana",
+    label: "Grafana",
+    parent: "monitoring",
+    role: "Dashboards",
     meta: [{ k: "Learning Stage", v: "Learning" }],
-    path: ["grafana","python","openai","mcp","langgraph","crewai","agentic"] },
+    path: ["grafana", "python", "openai", "mcp", "langgraph", "crewai", "agentic"],
+  },
 
-  { id: "python", label: "Python", parent: "grafana", role: "Programming Language",
+  {
+    id: "python",
+    label: "Python",
+    parent: "grafana",
+    role: "Programming Language",
     meta: [{ k: "Learning Stage", v: "Building" }],
-    path: ["python","openai","mcp","langgraph","crewai","agentic"] },
-  { id: "openai", label: "OpenAI API", parent: "python", role: "LLM Provider",
-    meta: [{ k: "Learning Stage", v: "Hands-on" }] },
-  { id: "mcp", label: "Model Context Protocol", parent: "openai", role: "Tool Interop Standard",
-    meta: [{ k: "Learning Stage", v: "Learning" }] },
-  { id: "langgraph", label: "LangGraph", parent: "mcp", role: "Agent Orchestration",
-    meta: [{ k: "Learning Stage", v: "Exploring" }] },
-  { id: "crewai", label: "CrewAI", parent: "langgraph", role: "Multi-agent Framework",
-    meta: [{ k: "Learning Stage", v: "Exploring" }] },
-  { id: "agentic", label: "Agentic AI Systems", parent: "crewai", role: "End Goal / Systems",
-    meta: [{ k: "Focus", v: "Autonomous engineering agents" }] },
+    path: ["python", "openai", "mcp", "langgraph", "crewai", "agentic"],
+  },
+  {
+    id: "openai",
+    label: "OpenAI API",
+    parent: "python",
+    role: "LLM Provider",
+    meta: [{ k: "Learning Stage", v: "Hands-on" }],
+  },
+  {
+    id: "mcp",
+    label: "Model Context Protocol",
+    parent: "openai",
+    role: "Tool Interop Standard",
+    meta: [{ k: "Learning Stage", v: "Learning" }],
+  },
+  {
+    id: "langgraph",
+    label: "LangGraph",
+    parent: "mcp",
+    role: "Agent Orchestration",
+    meta: [{ k: "Learning Stage", v: "Exploring" }],
+  },
+  {
+    id: "crewai",
+    label: "CrewAI",
+    parent: "langgraph",
+    role: "Multi-agent Framework",
+    meta: [{ k: "Learning Stage", v: "Exploring" }],
+  },
+  {
+    id: "agentic",
+    label: "Agentic AI Systems",
+    parent: "crewai",
+    role: "End Goal / Systems",
+    meta: [{ k: "Focus", v: "Autonomous engineering agents" }],
+  },
 ];
 
 // Live data-flow pulse cycle
-const LIVE_FLOW = ["aws","docker","terraform","gitlab","jenkins","kubernetes","prometheus","grafana"];
+const LIVE_FLOW = [
+  "aws",
+  "docker",
+  "terraform",
+  "gitlab",
+  "jenkins",
+  "kubernetes",
+  "prometheus",
+  "grafana",
+];
 
 // Build tree prefixes (├── / └── / │)
 function computeRows() {
@@ -139,21 +273,24 @@ export function Stack() {
       setVisibleCount(rows.length);
       return;
     }
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && !built) {
-          setBuilt(true);
-          let i = 0;
-          const tick = () => {
-            i++;
-            setVisibleCount(i);
-            if (i < rows.length) setTimeout(tick, 55);
-          };
-          tick();
-          obs.disconnect();
-        }
-      });
-    }, { rootMargin: "-15% 0px -15% 0px" });
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !built) {
+            setBuilt(true);
+            let i = 0;
+            const tick = () => {
+              i++;
+              setVisibleCount(i);
+              if (i < rows.length) setTimeout(tick, 55);
+            };
+            tick();
+            obs.disconnect();
+          }
+        });
+      },
+      { rootMargin: "-15% 0px -15% 0px" },
+    );
     obs.observe(el);
     return () => obs.disconnect();
   }, [built, rows.length]);
@@ -172,7 +309,10 @@ export function Stack() {
       setTimeout(loop, 900);
     };
     const start = setTimeout(loop, 1200);
-    return () => { stopped = true; clearTimeout(start); };
+    return () => {
+      stopped = true;
+      clearTimeout(start);
+    };
   }, [built]);
 
   const highlightSet = useMemo(() => {
@@ -196,8 +336,8 @@ export function Stack() {
       meta="./ecosystem/graph"
     >
       <p className="mb-10 max-w-2xl font-mono text-[12px] leading-relaxed text-muted-foreground reveal">
-        These aren't isolated technologies. They work together to build reliable
-        cloud infrastructure, DevOps workflows and AI systems.
+        These aren't isolated technologies. They work together to build reliable cloud
+        infrastructure, DevOps workflows and AI systems.
       </p>
 
       <div ref={ref} className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
@@ -217,11 +357,17 @@ export function Stack() {
               const nodeColor = isHover
                 ? "var(--foreground)"
                 : highlightSet
-                  ? (inHighlight ? "var(--foreground)" : "color-mix(in oklab, var(--muted-foreground) 45%, transparent)")
-                  : isRoot ? "var(--accent)" : "var(--foreground)";
+                  ? inHighlight
+                    ? "var(--foreground)"
+                    : "color-mix(in oklab, var(--muted-foreground) 45%, transparent)"
+                  : isRoot
+                    ? "var(--accent)"
+                    : "var(--foreground)";
 
               const dotColor = (highlightSet ? inHighlight : true)
-                ? (isRoot || isHover || inLive ? "var(--accent)" : "var(--muted-foreground)")
+                ? isRoot || isHover || inLive
+                  ? "var(--accent)"
+                  : "var(--muted-foreground)"
                 : "color-mix(in oklab, var(--muted-foreground) 40%, transparent)";
 
               return (
@@ -233,24 +379,34 @@ export function Stack() {
                     opacity: visible ? (highlightSet && !inHighlight ? 0.45 : 1) : 0,
                     transform: visible ? "translateY(0)" : "translateY(4px)",
                     transition: "opacity 400ms ease, transform 400ms ease, color 220ms ease",
-                    color: highlightSet && !inHighlight
-                      ? "color-mix(in oklab, var(--muted-foreground) 45%, transparent)"
-                      : "var(--muted-foreground)",
+                    color:
+                      highlightSet && !inHighlight
+                        ? "color-mix(in oklab, var(--muted-foreground) 45%, transparent)"
+                        : "var(--muted-foreground)",
                     cursor: "default",
                     padding: "1px 0",
                   }}
                 >
-                  <span style={{ color: "color-mix(in oklab, var(--muted-foreground) 55%, transparent)" }}>{r.prefix}</span>
+                  <span
+                    style={{
+                      color: "color-mix(in oklab, var(--muted-foreground) 55%, transparent)",
+                    }}
+                  >
+                    {r.prefix}
+                  </span>
                   <span
                     style={{
                       display: "inline-block",
-                      width: 8, height: 8, borderRadius: 999,
+                      width: 8,
+                      height: 8,
+                      borderRadius: 999,
                       background: dotColor,
                       marginRight: 10,
                       transform: "translateY(1px)",
-                      boxShadow: inLive || (isHover && !isRoot)
-                        ? "0 0 12px color-mix(in oklab, var(--accent) 80%, transparent)"
-                        : "none",
+                      boxShadow:
+                        inLive || (isHover && !isRoot)
+                          ? "0 0 12px color-mix(in oklab, var(--accent) 80%, transparent)"
+                          : "none",
                       transition: "background 220ms ease, box-shadow 400ms ease",
                     }}
                   />
@@ -295,7 +451,10 @@ export function Stack() {
             <div>&nbsp;&nbsp;- LangGraph</div>
             <div className="mt-2 text-muted-foreground">
               live-pulse: <span className="text-accent">{livePulse ?? "idle"}</span>
-              <span className="ml-1 inline-block h-[0.9em] w-[0.5ch] translate-y-[2px] bg-accent" style={{ animation: "cursor-blink 1s steps(1) infinite" }} />
+              <span
+                className="ml-1 inline-block h-[0.9em] w-[0.5ch] translate-y-[2px] bg-accent"
+                style={{ animation: "cursor-blink 1s steps(1) infinite" }}
+              />
             </div>
             <style>{`@keyframes cursor-blink { 50% { opacity: 0 } }`}</style>
           </div>

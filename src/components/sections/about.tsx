@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Section } from "../section";
 
 const NODES = [
-  { id: "cloud",   label: "Cloud",          sub: "diploma · aws fundamentals" },
-  { id: "infra",   label: "Infrastructure", sub: "linux · networking · ec2" },
-  { id: "auto",    label: "Automation",     sub: "docker · terraform · bash" },
-  { id: "devops",  label: "DevOps",         sub: "ci/cd · observability" },
-  { id: "agi",     label: "Agentic AI",     sub: "orchestration · runtimes" },
+  { id: "cloud", label: "Cloud", sub: "diploma · aws fundamentals" },
+  { id: "infra", label: "Infrastructure", sub: "linux · networking · ec2" },
+  { id: "auto", label: "Automation", sub: "docker · terraform · bash" },
+  { id: "devops", label: "DevOps", sub: "ci/cd · observability" },
+  { id: "agi", label: "Agentic AI", sub: "orchestration · runtimes" },
 ] as const;
 
 function CareerDiagram() {
@@ -66,12 +66,18 @@ function CareerDiagram() {
 
               {i < NODES.length - 1 && (
                 <div className="ml-4 flex h-6 items-center">
-                  <div className="relative h-full w-px overflow-hidden" style={{ background: "var(--border-strong)" }}>
+                  <div
+                    className="relative h-full w-px overflow-hidden"
+                    style={{ background: "var(--border-strong)" }}
+                  >
                     <span
                       className="absolute left-0 h-3 w-full"
                       style={{
-                        background: "linear-gradient(180deg, transparent, var(--accent), transparent)",
-                        animation: hover ? `flow-down 1.6s ${i * 0.12}s ease-in-out infinite` : "none",
+                        background:
+                          "linear-gradient(180deg, transparent, var(--accent), transparent)",
+                        animation: hover
+                          ? `flow-down 1.6s ${i * 0.12}s ease-in-out infinite`
+                          : "none",
                         opacity: hover ? 1 : 0,
                         transition: "opacity 300ms ease",
                       }}
@@ -106,24 +112,22 @@ export function About() {
         <div className="space-y-5 text-[15px] leading-relaxed text-foreground/85 reveal">
           <p>
             I'm Aryandra, based in Prayagraj. I finished my{" "}
-            <span className="text-foreground">Diploma in Cloud Computing</span> and I'm now
-            pursuing a <span className="text-foreground">BCA</span> while building projects
-            that force me to touch real infrastructure — the ones that break, log strange
-            errors, and only work after reading the docs twice.
+            <span className="text-foreground">Diploma in Cloud Computing</span> and I'm now pursuing
+            a <span className="text-foreground">BCA</span> while building projects that force me to
+            touch real infrastructure — the ones that break, log strange errors, and only work after
+            reading the docs twice.
           </p>
           <p>
-            My approach is simple: build the thing, deploy it, watch it fall over, fix it,
-            document what I learned, commit. Tutorials get me started; version control,
-            debugging and small automations are what actually make the knowledge stick.
-            Every project is a chance to make the next one a little more boring — in the
-            good way.
+            My approach is simple: build the thing, deploy it, watch it fall over, fix it, document
+            what I learned, commit. Tutorials get me started; version control, debugging and small
+            automations are what actually make the knowledge stick. Every project is a chance to
+            make the next one a little more boring — in the good way.
           </p>
           <p>
             The direction I'm heading in is{" "}
-            <span className="text-accent">Cloud Infrastructure, DevOps and Agentic AI</span>{" "}
-            — the platforms that let software (and eventually agents) run reliably in
-            production. I'd rather ship five honest projects than talk about ten I never
-            finished.
+            <span className="text-accent">Cloud Infrastructure, DevOps and Agentic AI</span> — the
+            platforms that let software (and eventually agents) run reliably in production. I'd
+            rather ship five honest projects than talk about ten I never finished.
           </p>
         </div>
         <div className="reveal">

@@ -21,7 +21,9 @@ function NotFoundComponent() {
         <div className="text-xs text-muted-foreground">ERR_ROUTE_NOT_FOUND</div>
         <h1 className="mt-2 text-6xl text-foreground">404</h1>
         <p className="mt-3 text-sm text-muted-foreground">Route unresolved. Return to root.</p>
-        <a href="/" className="mt-6 inline-block text-accent hover:underline">/ home</a>
+        <a href="/" className="mt-6 inline-block text-accent hover:underline">
+          / home
+        </a>
       </div>
     </div>
   );
@@ -38,8 +40,18 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <div className="text-xs text-muted-foreground">RUNTIME_EXCEPTION</div>
         <h1 className="mt-2 text-2xl text-foreground">System halted</h1>
         <div className="mt-6 flex justify-center gap-3 text-sm">
-          <button onClick={() => { router.invalidate(); reset(); }} className="text-accent hover:underline">retry</button>
-          <a href="/" className="text-muted-foreground hover:text-foreground">/ home</a>
+          <button
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
+            className="text-accent hover:underline"
+          >
+            retry
+          </button>
+          <a href="/" className="text-muted-foreground hover:text-foreground">
+            / home
+          </a>
         </div>
       </div>
     </div>
@@ -52,15 +64,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "guptaaryandra_ • DevOps & Cloud Engineer" },
-      { name: "description", content: "Premium engineering portfolio showcasing DevOps, Cloud Infrastructure, Automation, and Agentic AI projects." },
+      {
+        name: "description",
+        content:
+          "Premium engineering portfolio showcasing DevOps, Cloud Infrastructure, Automation, and Agentic AI projects.",
+      },
       { name: "author", content: "Aryandra Gupta" },
       { name: "theme-color", content: "#0B0B0C" },
       { property: "og:title", content: "guptaaryandra_ • DevOps & Cloud Engineer" },
-      { property: "og:description", content: "Premium engineering portfolio showcasing DevOps, Cloud Infrastructure, Automation, and Agentic AI projects." },
+      {
+        property: "og:description",
+        content:
+          "Premium engineering portfolio showcasing DevOps, Cloud Infrastructure, Automation, and Agentic AI projects.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "guptaaryandra_ • DevOps & Cloud Engineer" },
-      { name: "twitter:description", content: "Premium engineering portfolio showcasing DevOps, Cloud Infrastructure, Automation, and Agentic AI projects." },
+      {
+        name: "twitter:description",
+        content:
+          "Premium engineering portfolio showcasing DevOps, Cloud Infrastructure, Automation, and Agentic AI projects.",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -110,4 +134,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

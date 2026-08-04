@@ -25,7 +25,7 @@ export function Section({
           }
         });
       },
-      { rootMargin: "-10% 0px -10% 0px" }
+      { rootMargin: "-10% 0px -10% 0px" },
     );
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
@@ -37,7 +37,8 @@ export function Section({
         <div className="mb-8 sm:mb-10 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 reveal">
           <div className="min-w-0">
             <div className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-              <span className="text-accent mr-2">§</span>{label}
+              <span className="text-accent mr-2">§</span>
+              {label}
             </div>
             <h2
               className="mt-3 font-plex tracking-tight break-words"
@@ -47,7 +48,9 @@ export function Section({
             </h2>
           </div>
           {meta && (
-            <div className="hidden md:block font-mono text-[11px] text-muted-foreground shrink-0">{meta}</div>
+            <div className="hidden md:block font-mono text-[11px] text-muted-foreground shrink-0">
+              {meta}
+            </div>
           )}
         </div>
         {children}

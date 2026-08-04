@@ -13,8 +13,16 @@ const PHASES: Phase[] = [
     title: "Foundation",
     subtitle: "Operating systems, source control and the language everything else runs on.",
     techs: [
-      { name: "Linux", stage: "Production Practice", note: "Filesystems, processes, systemd, networking." },
-      { name: "Git & GitHub", stage: "Production Practice", note: "Branching, PR workflow, CI triggers." },
+      {
+        name: "Linux",
+        stage: "Production Practice",
+        note: "Filesystems, processes, systemd, networking.",
+      },
+      {
+        name: "Git & GitHub",
+        stage: "Production Practice",
+        note: "Branching, PR workflow, CI triggers.",
+      },
       { name: "Python", stage: "Building", note: "Automation scripting and AI tooling." },
     ],
   },
@@ -23,8 +31,16 @@ const PHASES: Phase[] = [
     title: "Cloud Engineering",
     subtitle: "Infrastructure and automation on real cloud environments.",
     techs: [
-      { name: "AWS", stage: "Production Practice", note: "EC2, S3, IAM, CloudFront, Route53, VPC." },
-      { name: "Docker", stage: "Production Practice", note: "Images, compose, multi-stage builds." },
+      {
+        name: "AWS",
+        stage: "Production Practice",
+        note: "EC2, S3, IAM, CloudFront, Route53, VPC.",
+      },
+      {
+        name: "Docker",
+        stage: "Production Practice",
+        note: "Images, compose, multi-stage builds.",
+      },
       { name: "Terraform", stage: "Hands-on", note: "IaC modules for AWS baseline." },
       { name: "Ansible", stage: "Exploring", note: "Configuration management and playbooks." },
     ],
@@ -54,7 +70,11 @@ const PHASES: Phase[] = [
     subtitle: "Long-term specialization: autonomous engineering agents.",
     techs: [
       { name: "OpenAI API", stage: "Hands-on", note: "Chat, tools, embeddings, function calling." },
-      { name: "Model Context Protocol", stage: "Learning", note: "Standard LLM ↔ tools interface." },
+      {
+        name: "Model Context Protocol",
+        stage: "Learning",
+        note: "Standard LLM ↔ tools interface.",
+      },
       { name: "LangGraph", stage: "Exploring", note: "Graph-based agent orchestration." },
       { name: "CrewAI", stage: "Exploring", note: "Role-based collaborative agents." },
       { name: "Agentic AI Systems", stage: "Learning", note: "End-to-end autonomous workflows." },
@@ -63,8 +83,15 @@ const PHASES: Phase[] = [
 ];
 
 const ROADMAP = [
-  "Linux", "Python", "Cloud", "Docker", "Terraform",
-  "CI/CD", "Kubernetes", "Monitoring", "Agentic AI",
+  "Linux",
+  "Python",
+  "Cloud",
+  "Docker",
+  "Terraform",
+  "CI/CD",
+  "Kubernetes",
+  "Monitoring",
+  "Agentic AI",
 ];
 
 function stageColor(stage: Stage) {
@@ -99,9 +126,8 @@ export function Learning() {
       meta="./lab/active"
     >
       <p className="mb-10 max-w-2xl font-mono text-[12px] leading-relaxed text-muted-foreground reveal">
-        The path an engineer walks — foundation, cloud, DevOps, observability
-        and finally agentic AI. Every technology below is placed where it
-        actually sits in that journey.
+        The path an engineer walks — foundation, cloud, DevOps, observability and finally agentic
+        AI. Every technology below is placed where it actually sits in that journey.
       </p>
 
       {/* Engineering Roadmap */}
@@ -114,7 +140,9 @@ export function Learning() {
             <span key={step} className="inline-flex items-center gap-2">
               <span>{step}</span>
               {i < ROADMAP.length - 1 && (
-                <span aria-hidden className="text-accent">→</span>
+                <span aria-hidden className="text-accent">
+                  →
+                </span>
               )}
             </span>
           ))}
@@ -130,9 +158,7 @@ export function Learning() {
               key={phase.id}
               className="reveal"
               onMouseEnter={() => setHoverPhase(phase.id)}
-              onMouseLeave={() =>
-                setHoverPhase((cur) => (cur === phase.id ? null : cur))
-              }
+              onMouseLeave={() => setHoverPhase((cur) => (cur === phase.id ? null : cur))}
               style={{
                 opacity: dim ? 0.4 : 1,
                 transition: "opacity 260ms ease",
@@ -165,9 +191,7 @@ export function Learning() {
                     <div
                       key={t.name}
                       onMouseEnter={() => setHoverTech(t.name)}
-                      onMouseLeave={() =>
-                        setHoverTech((cur) => (cur === t.name ? null : cur))
-                      }
+                      onMouseLeave={() => setHoverTech((cur) => (cur === t.name ? null : cur))}
                       className="group relative py-1"
                       style={{
                         opacity: techDim ? 0.55 : 1,
@@ -191,9 +215,7 @@ export function Learning() {
                           style={{
                             width: isHover ? "100%" : "40%",
                             background: stageColor(t.stage),
-                            transition: isHover
-                              ? "width 800ms ease-out"
-                              : "width 300ms ease",
+                            transition: isHover ? "width 800ms ease-out" : "width 300ms ease",
                           }}
                         />
                       </div>

@@ -16,17 +16,17 @@ type Line = {
 const LINES: Line[] = [
   { cmd: "$ boot" },
   { cmd: "Initializing engineering workspace..." },
-  { cmd: "Loading cloud modules...",         ok: "✓ Cloud modules loaded" },
-  { cmd: "Loading deployment records...",    ok: "✓ Deployment history restored" },
-  { cmd: "Mounting engineering lab...",      ok: "✓ Lab initialized" },
+  { cmd: "Loading cloud modules...", ok: "✓ Cloud modules loaded" },
+  { cmd: "Loading deployment records...", ok: "✓ Deployment history restored" },
+  { cmd: "Mounting engineering lab...", ok: "✓ Lab initialized" },
   { cmd: "Connecting infrastructure graph...", ok: "✓ Ecosystem online" },
   { cmd: "Syncing repository state..." },
   { cmd: "Checking dependencies..." },
- { cmd: "Restoring engineering workspace..." },
- { cmd: "HEAD → main" },
- { cmd: "Session Ready." },
- { cmd: "Welcome to my Engineering Workspace." },
- { cmd: "Launching Control Center..." },
+  { cmd: "Restoring engineering workspace..." },
+  { cmd: "HEAD → main" },
+  { cmd: "Session Ready." },
+  { cmd: "Welcome to my Engineering Workspace." },
+  { cmd: "Launching Control Center..." },
 ];
 
 // Per-character typing speed (ms). Kept lively but readable.
@@ -59,7 +59,11 @@ export function BootSequence() {
     if (typeof window === "undefined") return;
     reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Force scroll to top on fresh load / refresh
-    try { window.history.scrollRestoration = "manual"; } catch {}
+    try {
+      window.history.scrollRestoration = "manual";
+    } catch {
+      // Ignore errors
+    }
     window.scrollTo(0, 0);
     // Lock body scroll during boot
     const prevOverflow = document.body.style.overflow;
@@ -80,7 +84,6 @@ export function BootSequence() {
     window.scrollTo(0, 0);
   }, [visible]);
 
-
   // Type each line char-by-char, then advance.
   useEffect(() => {
     if (!visible) return;
@@ -94,15 +97,18 @@ export function BootSequence() {
     }
 
     // finished current line
-    const t = setTimeout(() => {
-      setCompleted((prev) => {
-        const next = prev.slice();
-        next[lineIdx] = true;
-        return next;
-      });
-      setLineIdx((i) => i + 1);
-      setCharIdx(0);
-    }, reducedMotion.current ? 0 : LINE_GAP);
+    const t = setTimeout(
+      () => {
+        setCompleted((prev) => {
+          const next = prev.slice();
+          next[lineIdx] = true;
+          return next;
+        });
+        setLineIdx((i) => i + 1);
+        setCharIdx(0);
+      },
+      reducedMotion.current ? 0 : LINE_GAP,
+    );
     return () => clearTimeout(t);
   }, [visible, lineIdx, charIdx]);
 
@@ -111,7 +117,10 @@ export function BootSequence() {
     if (lineIdx < LINES.length) return;
     const t1 = setTimeout(() => setClosing(true), HOLD_MS);
     const t2 = setTimeout(() => setVisible(false), HOLD_MS + FADE_MS);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [lineIdx]);
 
   // Git pulse progression synced to typing progress.
@@ -168,8 +177,8 @@ export function BootSequence() {
                     color: isCommand
                       ? "var(--foreground)"
                       : isHead
-                      ? "var(--accent)"
-                      : "var(--muted-foreground)",
+                        ? "var(--accent)"
+                        : "var(--muted-foreground)",
                   }}
                 >
                   {shown}
@@ -203,7 +212,10 @@ export function BootSequence() {
             <defs>
               <filter id="boot-glow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="2.4" result="b" />
-                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
               </filter>
             </defs>
 
@@ -222,7 +234,10 @@ export function BootSequence() {
 
             {/* Trunk line */}
             <line
-              x1={40} y1={22} x2={40} y2={NODE_YS[NODE_YS.length - 1] + 6}
+              x1={40}
+              y1={22}
+              x2={40}
+              y2={NODE_YS[NODE_YS.length - 1] + 6}
               stroke="var(--border-strong)"
               strokeOpacity={0.55}
               strokeWidth={1.1}
@@ -256,13 +271,7 @@ export function BootSequence() {
 
             {/* Pulse runner */}
             <g>
-              <circle
-                cx={40}
-                cy={22 + pulseY}
-                r={11}
-                fill="var(--accent)"
-                opacity={0.22}
-              />
+              <circle cx={40} cy={22 + pulseY} r={11} fill="var(--accent)" opacity={0.22} />
               <circle
                 cx={40}
                 cy={22 + pulseY}
@@ -282,7 +291,8 @@ export function BootSequence() {
           <span>Build v1.0.0</span>
           <span className="hidden sm:inline mx-2 opacity-60">·</span>
           <span>
-            Cloud <span className="opacity-40">•</span> DevOps <span className="opacity-40">•</span> Agentic AI
+            Cloud <span className="opacity-40">•</span> DevOps <span className="opacity-40">•</span>{" "}
+            Agentic AI
           </span>
         </div>
       </div>

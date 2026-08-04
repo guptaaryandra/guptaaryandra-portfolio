@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 
 const V_W = 380;
 const V_H = 620;
-const MAIN_X = 190;      // trunk centered
+const MAIN_X = 190; // trunk centered
 const LEFT_X = 80;
 const RIGHT_X = 300;
 
@@ -27,18 +27,98 @@ type Commit = {
 };
 
 const COMMITS: Commit[] = [
-  { id: "m1", x: MAIN_X,  y: 60,  branch: "main",  hash: "a18f2c1", label: "chore: init repo",         activateAt: 0.00 },
-  { id: "m2", x: MAIN_X,  y: 120, branch: "main",  hash: "93bc71e", label: "feat: core services",      activateAt: 0.08 },
+  {
+    id: "m1",
+    x: MAIN_X,
+    y: 60,
+    branch: "main",
+    hash: "a18f2c1",
+    label: "chore: init repo",
+    activateAt: 0.0,
+  },
+  {
+    id: "m2",
+    x: MAIN_X,
+    y: 120,
+    branch: "main",
+    hash: "93bc71e",
+    label: "feat: core services",
+    activateAt: 0.08,
+  },
   // left branch: feature/ai
-  { id: "a1", x: LEFT_X,  y: 170, branch: "ai",    hash: "c91f8d2", label: "feat(ai): agent runtime",  activateAt: 0.20 },
-  { id: "a2", x: LEFT_X,  y: 220, branch: "ai",    hash: "7f4e08b", label: "feat(ai): tool router",    activateAt: 0.30 },
-  { id: "m3", x: MAIN_X,  y: 280, branch: "main",  hash: "2d81fa4", label: "merge: feature/ai",        activateAt: 0.42 },
-  { id: "m4", x: MAIN_X,  y: 340, branch: "main",  hash: "5ea9c30", label: "feat: platform api",       activateAt: 0.52 },
+  {
+    id: "a1",
+    x: LEFT_X,
+    y: 170,
+    branch: "ai",
+    hash: "c91f8d2",
+    label: "feat(ai): agent runtime",
+    activateAt: 0.2,
+  },
+  {
+    id: "a2",
+    x: LEFT_X,
+    y: 220,
+    branch: "ai",
+    hash: "7f4e08b",
+    label: "feat(ai): tool router",
+    activateAt: 0.3,
+  },
+  {
+    id: "m3",
+    x: MAIN_X,
+    y: 280,
+    branch: "main",
+    hash: "2d81fa4",
+    label: "merge: feature/ai",
+    activateAt: 0.42,
+  },
+  {
+    id: "m4",
+    x: MAIN_X,
+    y: 340,
+    branch: "main",
+    hash: "5ea9c30",
+    label: "feat: platform api",
+    activateAt: 0.52,
+  },
   // right branch: feature/devops
-  { id: "d1", x: RIGHT_X, y: 390, branch: "ops",   hash: "ab17f3e", label: "feat(ops): terraform mod", activateAt: 0.62 },
-  { id: "d2", x: RIGHT_X, y: 440, branch: "ops",   hash: "b442e51", label: "feat(ops): ci pipeline",   activateAt: 0.72 },
-  { id: "m5", x: MAIN_X,  y: 500, branch: "main",  hash: "c0d3ed9", label: "merge: feature/devops",    activateAt: 0.86 },
-  { id: "m6", x: MAIN_X,  y: 560, branch: "main",  hash: "e7a1b02", label: "release: v1.0.0",          activateAt: 0.99 },
+  {
+    id: "d1",
+    x: RIGHT_X,
+    y: 390,
+    branch: "ops",
+    hash: "ab17f3e",
+    label: "feat(ops): terraform mod",
+    activateAt: 0.62,
+  },
+  {
+    id: "d2",
+    x: RIGHT_X,
+    y: 440,
+    branch: "ops",
+    hash: "b442e51",
+    label: "feat(ops): ci pipeline",
+    activateAt: 0.72,
+  },
+  {
+    id: "m5",
+    x: MAIN_X,
+    y: 500,
+    branch: "main",
+    hash: "c0d3ed9",
+    label: "merge: feature/devops",
+    activateAt: 0.86,
+  },
+  {
+    id: "m6",
+    x: MAIN_X,
+    y: 560,
+    branch: "main",
+    hash: "e7a1b02",
+    label: "release: v1.0.0",
+    activateAt: 0.99,
+  },
 ];
 
 const STATIC_EDGES: Array<{ d: string; branch: Branch; merged?: boolean }> = [
@@ -51,11 +131,19 @@ const STATIC_EDGES: Array<{ d: string; branch: Branch; merged?: boolean }> = [
   // feature/ai (LEFT)
   { d: `M ${MAIN_X} 120 C ${MAIN_X} 155, ${LEFT_X} 135, ${LEFT_X} 170`, branch: "ai" },
   { d: `M ${LEFT_X} 170 L ${LEFT_X} 220`, branch: "ai" },
-  { d: `M ${LEFT_X} 220 C ${LEFT_X} 255, ${MAIN_X} 245, ${MAIN_X} 280`, branch: "ai", merged: true },
+  {
+    d: `M ${LEFT_X} 220 C ${LEFT_X} 255, ${MAIN_X} 245, ${MAIN_X} 280`,
+    branch: "ai",
+    merged: true,
+  },
   // feature/devops (RIGHT)
   { d: `M ${MAIN_X} 340 C ${MAIN_X} 375, ${RIGHT_X} 355, ${RIGHT_X} 390`, branch: "ops" },
   { d: `M ${RIGHT_X} 390 L ${RIGHT_X} 440`, branch: "ops" },
-  { d: `M ${RIGHT_X} 440 C ${RIGHT_X} 475, ${MAIN_X} 465, ${MAIN_X} 500`, branch: "ops", merged: true },
+  {
+    d: `M ${RIGHT_X} 440 C ${RIGHT_X} 475, ${MAIN_X} 465, ${MAIN_X} 500`,
+    branch: "ops",
+    merged: true,
+  },
 ];
 
 const RUNNER_D =
@@ -82,10 +170,10 @@ type StatusKind = "idle" | "running" | "done";
 type StatusMsg = { kind: StatusKind; text: string };
 
 const RUN_STAGES: Array<{ at: number; text: string }> = [
-  { at: 0.00, text: "Replaying commit history..." },
+  { at: 0.0, text: "Replaying commit history..." },
   { at: 0.18, text: "Checking out feature/ai..." },
   { at: 0.28, text: "Creating commits on feature/ai..." },
-  { at: 0.40, text: "Merging feature/ai into main..." },
+  { at: 0.4, text: "Merging feature/ai into main..." },
   { at: 0.55, text: "Checking out feature/devops..." },
   { at: 0.65, text: "Creating commits on feature/devops..." },
   { at: 0.82, text: "Merging feature/devops into main..." },
@@ -113,7 +201,6 @@ export function HeroObject() {
     }
     setReplays((n) => n + 1);
   };
-
 
   useEffect(() => {
     if (replays === 0) return;
@@ -174,7 +261,6 @@ export function HeroObject() {
     setHoveredCommit(null);
   };
 
-
   const isActivated = (c: Commit) => progress >= c.activateAt;
   const nearRunner = (c: Commit) => {
     if (!runnerPt) return 0;
@@ -214,17 +300,28 @@ export function HeroObject() {
         <defs>
           <filter id="runner-glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="3" result="b" />
-            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
           </filter>
         </defs>
 
         <path ref={runnerPathRef} d={RUNNER_D} fill="none" stroke="none" />
 
         <g fontFamily="JetBrains Mono, monospace" fontSize="9" fill="var(--muted-foreground)">
-          <text x={MAIN_X} y={30} textAnchor="middle" fill="var(--accent)">HEAD</text>
-          <text x={MAIN_X} y={598} textAnchor="middle">main</text>
-          <text x={LEFT_X - 6} y={175} textAnchor="end">feature/ai</text>
-          <text x={RIGHT_X + 6} y={395} textAnchor="start">feature/devops</text>
+          <text x={MAIN_X} y={30} textAnchor="middle" fill="var(--accent)">
+            HEAD
+          </text>
+          <text x={MAIN_X} y={598} textAnchor="middle">
+            main
+          </text>
+          <text x={LEFT_X - 6} y={175} textAnchor="end">
+            feature/ai
+          </text>
+          <text x={RIGHT_X + 6} y={395} textAnchor="start">
+            feature/devops
+          </text>
         </g>
 
         {STATIC_EDGES.map((e, i) => {
@@ -263,7 +360,8 @@ export function HeroObject() {
               <circle cx={c.x} cy={c.y} r={14} fill="transparent" />
               <circle cx={c.x} cy={c.y} r={9} fill={baseColor} opacity={ringOpacity} />
               <circle
-                cx={c.x} cy={c.y}
+                cx={c.x}
+                cy={c.y}
                 r={activated ? 4 : 3.2}
                 fill={activated ? baseColor : "var(--background)"}
                 stroke={baseColor}
@@ -310,7 +408,13 @@ export function HeroObject() {
         {runnerPt && (
           <g style={{ pointerEvents: "none" }}>
             <circle cx={runnerPt.x} cy={runnerPt.y} r={12} fill="var(--accent)" opacity={0.18} />
-            <circle cx={runnerPt.x} cy={runnerPt.y} r={5.5} fill="var(--accent)" filter="url(#runner-glow)" />
+            <circle
+              cx={runnerPt.x}
+              cy={runnerPt.y}
+              r={5.5}
+              fill="var(--accent)"
+              filter="url(#runner-glow)"
+            />
           </g>
         )}
       </svg>
@@ -329,7 +433,9 @@ export function HeroObject() {
             }}
           >
             {status.kind === "done" ? (
-              <span className="text-[11px] leading-none" style={{ color: "var(--success)" }}>✓</span>
+              <span className="text-[11px] leading-none" style={{ color: "var(--success)" }}>
+                ✓
+              </span>
             ) : (
               <span
                 className="inline-block h-1.5 w-1.5 rounded-full align-middle"
@@ -349,8 +455,6 @@ export function HeroObject() {
           </span>
         </div>
       </div>
-
-
     </div>
   );
 }

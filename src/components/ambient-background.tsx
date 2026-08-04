@@ -7,7 +7,10 @@ export function AmbientBackground() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     let raf = 0;
-    let tx = 0, ty = 0, cx = 0, cy = 0;
+    let tx = 0,
+      ty = 0,
+      cx = 0,
+      cy = 0;
     const onMove = (e: MouseEvent) => {
       tx = (e.clientX / window.innerWidth - 0.5) * 8;
       ty = (e.clientY / window.innerHeight - 0.5) * 8;
