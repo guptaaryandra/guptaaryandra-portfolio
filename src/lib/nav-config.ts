@@ -8,7 +8,9 @@ export type NavItem = {
 
 export const NAV_ITEMS: NavItem[] = [
   { id: "about", label: "README", desktop: true },
+  { id: "work", label: "EXPERIENCE", desktop: true },
   { id: "experience", label: "LOGBOOK", desktop: true },
+
   { id: "projects", label: "DEPLOYMENTS", desktop: true },
   { id: "learning", label: "LAB", desktop: true },
   { id: "stack", label: "ECOSYSTEM", desktop: true },
