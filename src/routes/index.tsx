@@ -23,7 +23,9 @@ function Index() {
       <main>
         <Hero />
         <About />
+        <Work />
         <Experience />
+
         <Projects />
         <Learning />
         <Stack />
