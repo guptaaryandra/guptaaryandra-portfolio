@@ -121,7 +121,7 @@ export function Learning() {
   return (
     <Section
       id="learning"
-      label="04 · Engineering Lab"
+      label="05 · Engineering Lab"
       title={<TypedTitle text="THE LAB NEVER SLEEPS." />}
       meta="./lab/active"
     >

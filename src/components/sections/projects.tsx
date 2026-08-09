@@ -269,7 +269,7 @@ export function Projects() {
   return (
     <Section
       id="projects"
-      label="03 · Deployments"
+      label="04 · Deployments"
       title={<TypedTitle text="Deployment records, not marketing cards." />}
       meta="./deployments"
     >

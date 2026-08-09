@@ -28,7 +28,7 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      label="06 · Connect"
+      label="08 · Connect"
       title={<TypedTitle text="Let's build something." />}
       meta="./connect"
     >
