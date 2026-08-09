@@ -371,7 +371,7 @@ export function Experience() {
   return (
     <Section
       id="experience"
-      label="02 · Engineering Logbook"
+      label="03 · Engineering Logbook"
       title={<TypedTitle text="Commits from the field." />}
       meta="./log/engineering"
     >

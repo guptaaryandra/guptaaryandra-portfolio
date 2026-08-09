@@ -331,7 +331,7 @@ export function Stack() {
   return (
     <Section
       id="stack"
-      label="05 · Engineering Ecosystem"
+      label="06 · Engineering Ecosystem"
       title={<TypedTitle text="Engineering is understanding how systems connect." />}
       meta="./ecosystem/graph"
     >
