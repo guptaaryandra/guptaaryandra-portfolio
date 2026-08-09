@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { About } from "@/components/sections/about";
+import { Work } from "@/components/sections/work";
 import { Experience } from "@/components/sections/experience";
+
 import { Projects } from "@/components/sections/projects";
 import { Learning } from "@/components/sections/learning";
 import { Stack } from "@/components/sections/stack";
