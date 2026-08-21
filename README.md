@@ -139,6 +139,9 @@ Run locally
 ```bash
 npm run dev
 ```
+Once the development server is running, you can access the app at:
+
+http://localhost:8080
 
 Create production build
 
